@@ -58,7 +58,7 @@ class FlickrapiApplicationTests {
 			File file = resource.getFile();
 
 			byte[] bdata = FileCopyUtils.copyToByteArray(input);
-			 data = new String(bdata, StandardCharsets.UTF_8);
+			data = new String(bdata, StandardCharsets.UTF_8);
 
 
 		}
@@ -73,7 +73,7 @@ class FlickrapiApplicationTests {
 				ArgumentMatchers.any(HttpMethod.class),
 				ArgumentMatchers.any(),
 				ArgumentMatchers.<Class<String>>any()))
-		.thenReturn(mockedResponse);
+				.thenReturn(mockedResponse);
 
 		List<FlickrImagesResponseVO> result = service.getFlickrFeedPhotosDefault();
 		assertThat(result.size()).isEqualTo(20);
@@ -112,31 +112,42 @@ class FlickrapiApplicationTests {
 				ArgumentMatchers.<Class<String>>any()))
 				.thenReturn(mockedResponse);
 
-		List<FlickrImagesResponseVO> result = service.getFlickrFeedPhotosWithTags("cats");
+		List<FlickrImagesResponseVO> result = service.getAllFeedData();
 
-		//assertThat(result.get(0).getTags().contains("cat")).isEqualTo(true);
-
-		boolean assertEnabled = false;
-
-		for (FlickrImagesResponseVO results : result) {
-//			System.out.println(results.getTags());
-//			if(results.getTags().contains("presents")){
-//				System.out.println("Passed");
-//				assertEnabled = true;
-//			}
-//			else{
-//				System.out.println("Failed");
-//				assertEnabled = false;
-//				break;
-//			}
-
-			assertThat(results.getTags().contains("cat")).isEqualTo(true);
-
-		}
+		// Check the first row only to make sure it return cats in the tag
+		assertThat(result.get(0).getTags().contains("cat")).isEqualTo(true);
 
 
+	}
 
-		//assertThat(result.get(0).getTags().contains("cat")).isEqualTo(true);
+
+	@Test
+	void GivenValidResponseFromLocalStorageWillAllData_ExpectSuccess() {
+
+		List<FlickrImagesResponseVO> result = service.getAllFeedData();
+
+		assertThat(result.size()).isEqualTo(40);
+
+	}
+
+	@Test
+	void GivenValidResponseFromLocalStorageWillAllData_ExpectEmpty() {
+
+		service.deleteAllFeed();
+
+		List<FlickrImagesResponseVO> result = service.getAllFeedData();
+
+		assertThat(result.size()).isEqualTo(0);
+
+	}
+
+	@Test
+	void GivenValidResponseFromLocalStorageWithTags_ExpectSuccess() {
+
+		List<FlickrImagesResponseVO> result = service.getFeedDataByTags("cats");
+
+		// Check the first row only to make sure it return cats in the tag
+		assertThat(result.get(0).getTags().contains("cat")).isEqualTo(true);
 
 	}
 
