@@ -106,9 +106,12 @@ public class FlickrImagesService {
 
     }
 
-    public List<FlickrImagesEntity> getAllFeedData(){
+    public List<FlickrImagesResponseVO> getAllFeedData(){
 
-        return flickrImagesRepository.findAll();
+        ModelMapper modelMapper = new ModelMapper();
+        List<FlickrImagesEntity> flickrImagesEntityList = flickrImagesRepository.findAll();
+
+        return flickrImagesEntityList.stream().map(entity -> modelMapper.map(entity, FlickrImagesResponseVO.class)).collect(Collectors.toList());
 
     }
 

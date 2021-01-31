@@ -28,7 +28,7 @@ public class FlickrImagesController {
     }
 
     @GetMapping("/getAllFeedData")
-    public List<FlickrImagesEntity> getAllFeedData(){
+    public List<FlickrImagesResponseVO> getAllFeedData(){
 
         // Call Service to get all existing data in local DB
         return flickrImagesService.getAllFeedData();
