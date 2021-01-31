@@ -1,0 +1,11 @@
+
+s
+java:S1128"QRemove this unused import 'org.springframework.format.annotation.DateTimeFormat'.(‡ˆôƒøÿÿÿÿ8Ê¬Ç•õ.
+Q
+java:S1128"5Remove this unused import 'javax.persistence.Column'.(ìûæH8ÌÇ•õ.
+Z
+java:S1128"=Remove this unused import 'javax.persistence.GenerationType'.(ı÷õ¡8Ó¹È•õ.
+Z
+java:S1128"=Remove this unused import 'javax.persistence.GeneratedValue'.(¤®À‚8Ó¹È•õ.
+N
+java:S1128	"1Remove this unused import 'javax.persistence.Id'.(ş¹ŞÜ8Ó¹È•õ.
